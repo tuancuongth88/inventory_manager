@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'inventory_manager',
+			'database'  => 'inventory_management',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
