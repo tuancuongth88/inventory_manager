@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'apistory',
+			'database'  => 'inventory_manager',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
