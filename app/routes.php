@@ -25,9 +25,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('user/resPassword', array('uses' => 'UserController@resPassword'));
 	Route::resource('/user', 'UserController');
 
-	Route::resource('/category', 'CategoryController');
 
-	Route::resource('/story', 'StoryController');
 }
 });
 
@@ -38,9 +36,6 @@ Route::group(['prefix' => 'api'], function () {
 	Route::get('/register', 'RegisterController@index');
 	Route::post('/register', 'RegisterController@store');
 
-	//category
-	Route::post('/category', 'ApiCategoryController@index');
-	Route::resource('/category', 'ApiCategoryController');
 
 
 });
