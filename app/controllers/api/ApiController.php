@@ -11,6 +11,6 @@ class ApiController extends BaseController {
             $sessionId = Common::getSessionId(Input::all(), $userId);
             return Common::returnData(200, SUCCESS, $userId, $sessionId);
         }
+        throw new Prototype\Exceptions\UserLoginException();
     }
-
 }

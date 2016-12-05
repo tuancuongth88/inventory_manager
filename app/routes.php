@@ -35,8 +35,7 @@ Route::group(['prefix' => 'api'], function () {
 	Route::post('/logout', 'LogoutController@logout');
 	Route::get('/register', 'RegisterController@index');
 	Route::post('/register', 'RegisterController@store');
-
-
+	
 
 });
 

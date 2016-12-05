@@ -6,3 +6,4 @@ define('ACTIVE', 1);
 define('INACTIVE', 2);
 //success
 define('SUCCESS', 'Success');
+define('RANDOMSTRING', 16);
