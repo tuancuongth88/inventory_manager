@@ -1,6 +1,6 @@
 <?php
 
-class ApiCategoryController extends ApiController {
+class ApiImportManagement extends ApiController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,9 +9,7 @@ class ApiCategoryController extends ApiController {
 	 */
 	public function index()
 	{
-		// dd(123);
-		$input = Input::all();
-		return Common::returnDataNotUser( Common::getCategoryWithLike($input));
+		//
 	}
 
 
@@ -22,8 +20,7 @@ class ApiCategoryController extends ApiController {
 	 */
 	public function create()
 	{
-		$data =  Config::get('database.connections');
-		dd($data);
+		//
 	}
 
 
@@ -34,7 +31,25 @@ class ApiCategoryController extends ApiController {
 	 */
 	public function store()
 	{
-		$input = Input::ex();
+        $input = Input::all();
+        $checkThreading = $input->id_threading();
+        $checkidvoteIM = 0;
+        if ($checkThreading = 'accreditation'){
+            $checkidvoteIM = checkIdVote('ImportManagement',$input->id_vote);
+            if ($checkidvoteIM){
+                CommonNormal::update($input->id_vote,$input,'ImportManagement');
+            }else{
+                CommonNormal::create($input,'ImportManagement');
+            }
+        }else{
+            $checkidvoteIM = checkIdVote('ImportManagementAccreditation',$input->id_vote);
+            if ($checkidvoteIM){
+                CommonNormal::update($input->id_vote,$input,'ImportManagementAccreditation');
+            }else{
+                CommonNormal::create($input,'ImportManagementAccreditation');
+            }
+        }
+
 	}
 
 

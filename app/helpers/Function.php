@@ -46,3 +46,11 @@ function generateRandomString($length = RANDOMSTRING) {
     }
     return $randomString;
 }
+ function checkIdVote($model,$id_vote){
+     $data = $model::find($id_vote);
+     if ($data){
+         return true;
+     }else{
+         return false;
+     }
+ }
