@@ -16,28 +16,9 @@ class Common {
 		return Response::json(['data' => $data]);
 	}
 	public static function getSessionId($input, $userId)
-	{
-		$device = User::where('user_id', $userId)
-						->first();
-		if($device) {
-			if(empty($input['session_id'])) {
-				$sessionId = $device->session_id;
-				if(!($sessionId)) {
-					$sessionId = generateRandomString();
-					User::find($device->id)->update(['session_id' => $sessionId]);
-				}
-			}
-			else {
-				if($device->session_id == $input['session_id']) {
-					$sessionId = $input['session_id'];
-				} else {
-					throw new Prototype\Exceptions\UserSessionErrorException();
-				}
-			}
-		} else {
-			$sessionId = generateRandomString();
-			User::create(['device_id'=>$input['device_id'], 'user_id'=>$userId, 'session_id'=>$sessionId]);
-		}
+	{		
+		$sessionId = generateRandomString();
+		User::where('id', $userId)->update([ 'session_id'=>$sessionId]);
 		return $sessionId;
 	}
 	public static function getCategoryWithLike($input)
@@ -54,5 +35,23 @@ class Common {
 		}
 		$data = array_merge(['0'=>array('id'=>0, 'name'=>'Home')], $data);
 		return $data;
+	}
+	public static function checkSessionId($input)
+	{
+		$user = User::where('session_id', $input['session_id'])
+						->where('user_id', $input['user_id'])
+						->first();
+		if(!empty($user)) {
+			return $input['session_id'];
+		}
+		return false;
+	}
+	public static function checkSessionLogin($input)
+	{
+		$sessionId = Common::checkSessionId($input);
+		if (!$sessionId) {
+			throw new Prototype\Exceptions\UserSessionErrorException();
+		}
+		return $sessionId;
 	}
 }
