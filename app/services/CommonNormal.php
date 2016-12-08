@@ -37,6 +37,7 @@ class CommonNormal
 		if($name == 'story') {
 			return 'Story';
 		}
+		return $name;
 		
 
 	}

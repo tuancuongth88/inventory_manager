@@ -29,7 +29,7 @@ class CreateImportManagement extends Migration {
             $table->string('percentage_shells', 20)->nullable();
             $table->string('weights_minus_tons', 20)->nullable();
             $table->string('production_locations',20)->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('id_status')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

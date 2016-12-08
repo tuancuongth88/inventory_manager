@@ -39,7 +39,7 @@ class Common {
 	public static function checkSessionId($input)
 	{
 		$user = User::where('session_id', $input['session_id'])
-						->where('user_id', $input['user_id'])
+						->where('id', $input['user_id'])
 						->first();
 		if(!empty($user)) {
 			return $input['session_id'];

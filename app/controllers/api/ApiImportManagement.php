@@ -32,23 +32,30 @@ class ApiImportManagement extends ApiController {
 	public function store()
 	{
         $input = Input::all();
-        $checkThreading = $input->id_threading();
+        $checkThreading = $input['id_threading'];
         $checkidvoteIM = 0;
+        $user_id = $input['user_id'];
+        $data = 'no data insert';
+        $ssuserid = Common::checkSessionLogin($input);
         if ($checkThreading = 'accreditation'){
-            $checkidvoteIM = checkIdVote('ImportManagement',$input->id_vote);
+            $checkidvoteIM = checkIdVote('ImportManagement',$input['id_vote']);
             if ($checkidvoteIM){
-                CommonNormal::update($input->id_vote,$input,'ImportManagement');
+                CommonNormal::update($input['id_vote'],$input,'ImportManagement');
+                $data = 'data update success';
             }else{
                 CommonNormal::create($input,'ImportManagement');
+                $data = 'data insert success';
             }
         }else{
-            $checkidvoteIM = checkIdVote('ImportManagementAccreditation',$input->id_vote);
+            $checkidvoteIM = checkIdVote('ImportManagementAccreditation',$input['id_vote']);
             if ($checkidvoteIM){
-                CommonNormal::update($input->id_vote,$input,'ImportManagementAccreditation');
+                CommonNormal::update($input['id_vote'],$input,'ImportManagementAccreditation');
             }else{
                 CommonNormal::create($input,'ImportManagementAccreditation');
             }
         }
+
+        return Common::returnData(200,SUCCESS,$user_id,$ssuserid, $data);
 
 	}
 
